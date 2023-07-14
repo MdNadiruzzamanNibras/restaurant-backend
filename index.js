@@ -33,7 +33,12 @@ async function run() {
       const dishs = await cursor.toArray()
       res.send(dishs)
     })
-
+    app.get('/dish/:id', async(req,res)=>{
+      const id =req.params.id 
+      const qurey ={_id:ObjectId(id)}
+      const  result= await ordersCollection.findOne(qurey)
+      res.send(result)
+    })
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
